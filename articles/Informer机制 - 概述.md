@@ -537,7 +537,7 @@ func (s *sharedIndexInformer)  AddEventHandlerWithResyncPeriod(handler ResourceE
 * 在整个k8s体系下，是通过哪些手段减少对kube-apiserver的压力？
 > 1. informer机制：
 > * 维护本地store(Indexer)从而使得 `R` 操作直接访问Inxer即可。也即是通过obj-key在indexer中直接取到obj。
->* ListAndWatch机制，减少与ApiServer的交互，只有在起初通过一次List来全量获取，后续通过watch已增量的方式来更新。
+>* ListAndWatch机制，减少与ApiServer的交互，只有在起初通过一次List来全量获取，后续通过watch以增量的方式来更新。
 >2. sharedInformer机制：
 >* singleton模式：同一个资源只有一个informer实例，多个listener来绑定informer，从而实现一种资源的改动，通过一个informer实例，通知给若干个listener。避免多个listener都与ApiServer打交道。
 
